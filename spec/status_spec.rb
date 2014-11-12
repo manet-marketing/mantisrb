@@ -1,11 +1,9 @@
 require_relative 'spec_helper'
-require 'savon_spec'
-Savon::Spec::Fixture.path = File.expand_path("../fixtures", __FILE__)
+
 require 'mocha'
 require 'mocha/integration/mini_test'
 
 class TestStatus < MiniTest::Unit::TestCase
-  include Savon::Spec::Macros
 
   def setup
     @session = create_session

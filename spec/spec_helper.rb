@@ -20,10 +20,6 @@ MANTIS_URL = ENV['MANTIS_URL'] ? ENV['MANTIS_URL'] : "http://www.plangineering.c
 MANTIS_USER = "admin"
 MANTIS_PASS = "RFBDSlBxYURURXpCMXpoeA=="
 
-Savon.configure do |config|
-  config.log = false
-  config.log_level = :info
-end
 require 'mocha/integration/mini_test'
 HTTPI.log = false
 

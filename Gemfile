@@ -9,8 +9,9 @@ group :development do
   gem "yard"
   gem "rdiscount"
   gem "simplecov", '>= 0.5.2'
+  gem "rspec", '< 3'
+  gem 'mocha', '>= 0.9.8'
   gem "pry", ">= 0.9.5"
-  gem "savon_spec"
 end
 
 group :guard do
