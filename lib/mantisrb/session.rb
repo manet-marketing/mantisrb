@@ -1,7 +1,7 @@
 # Mantis module that is the base for all {::Configs}, {::Session}'s, and
 # {::Projects} and {::Filters}
 module Mantis
-  
+
   # A Session is how you will perform requests to Mantis through the SOAP API.
   # 
   # To create a session, simply pass in the URL to the Mantis server, username,
@@ -49,7 +49,7 @@ module Mantis
     def response(request, params={})
       if params.kind_of?(Nokogiri::XML::Document)
         # convert Nokogiri::XML::Document to Hash
-        params = Nori.new.parse(params.to_s).symbolize_keys
+        params = Nori.new(convert_tags_to: lambda { |tag| tag.snakecase.to_sym }).parse(params.to_s)
       end
       @connection.call request, :message=>add_credentials(params)
     end
@@ -107,7 +107,7 @@ module Mantis
     # @param [String] url URL to clean
     # @return [String] A URL that should be just the mantis URL + SOAP endpoint
     def sanitize_api_url(url)
-      unless url.match(/\/api\//) 
+      unless url.match(/\/api\//)
         return url + SOAP_API
       end
       url
