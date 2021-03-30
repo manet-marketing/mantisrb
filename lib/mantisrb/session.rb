@@ -47,6 +47,10 @@ module Mantis
     # wrapped into <key>value</key> so nesting is encouraged.
     # @return [Hash] Raw response back from Mantis converted from XML to Hash.
     def response(request, params={})
+      if params.kind_of?(Nokogiri::XML::Document)
+        # convert Nokogiri::XML::Document to Hash
+        params = Nori.new.parse(params.to_s).symbolize_keys
+      end
       @connection.call request, :message=>add_credentials(params)
     end
 
